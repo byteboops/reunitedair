@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a1e3f">
+<meta name="description" content="Reunited Airlines - Viaje com conforto por todo o PTFS">
+<title>Reunited Airlines</title>
+
+<link rel="icon" type="image/png" href="united.png">
+<link rel="apple-touch-icon" href="united.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= HEADER GLOBAL (oculto na landing) ================= -->
+<header class="header" id="header" hidden>
+  <div class="header__brand">
+    <img src="united.png" alt="Reunited Airlines" class="header__logo">
+    <span>Reunited Airlines</span>
+  </div>
+  <div class="header__actions">
+    <button class="icon-btn" id="btn-carrinho" aria-label="Carrinho">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>
+        <path d="M2 3h3l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 7H5"/>
+      </svg>
+      <span class="badge" id="badge-carrinho" hidden>0</span>
+    </button>
+    <button class="icon-btn" id="btn-menu" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ================= DRAWER (menu hambúrguer) ================= -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__head">
+    <div class="drawer__avatar" id="drawer-avatar">U</div>
+    <div class="drawer__user">
+      <strong id="drawer-nome">Usuário</strong>
+      <span id="drawer-email">email@exemplo.com</span>
+    </div>
+  </div>
+  <nav class="drawer__nav">
+    <button class="drawer__item" data-nav="inicio">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+      Início
+    </button>
+    <button class="drawer__item" data-nav="passagens">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 3"/></svg>
+      Passagens
+    </button>
+    <button class="drawer__item" data-nav="carrinho">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 7H5"/></svg>
+      Carrinho
+    </button>
+    <button class="drawer__item" data-nav="config">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      Configurações
+    </button>
+  </nav>
+  <div class="drawer__foot">Reunited Airlines — PTFS</div>
+</aside>
+
+<!-- ================= APP / TELAS ================= -->
+<div id="app">
+
+  <!-- ========== TELA: LANDING ========== -->
+  <section class="tela" id="tela-landing" data-tela="landing">
+    <main class="main">
+      <section class="hero">
+        <div class="hero__inner">
+          <span class="hero__badge">✈ PTFS • Pilot Training Flight Simulator</span>
+          <h1 class="hero__title">Viaje com conforto por todo o PTFS</h1>
+          <p class="hero__sub">A Reunited Airlines leva você aos principais aeroportos do Roblox com o serviço de bordo que você merece. Passagens gratuitas, experiência premium.</p>
+          <div class="hero__cta">
+            <button class="btn btn--primary" data-ir="login">Fazer login →</button>
+            <button class="btn btn--ghost" data-ir="cadastro">Criar conta</button>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="section-title"><span class="section-title__bar"></span>O que dizem nossos passageiros</h2>
+      <p class="section-sub">Avaliações reais de quem já voou com a Reunited.</p>
+      <div class="reviews-grid">
+        <article class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">"A melhor experiência de vôo no PTFS. Serviço de bordo impecável e poltronas confortáveis. Recomendo demais!"</p>
+          <div class="review__author">
+            <div class="review__avatar">L</div>
+            <div>
+              <div class="review__name">Lucas Andrade</div>
+              <div class="review__role">Piloto frequente</div>
+            </div>
+          </div>
+        </article>
+        <article class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">"A primeira classe é surreal — poltrona reclina 90°, filmes, séries e sobremesa. Vale cada centavo (que é zero, aliás)."</p>
+          <div class="review__author">
+            <div class="review__avatar">M</div>
+            <div>
+              <div class="review__name">Marina Costa</div>
+              <div class="review__role">Passageira primeira classe</div>
+            </div>
+          </div>
+        </article>
+        <article class="review">
+          <div class="review__stars">★★★★★</div>
+          <p class="review__text">"Atendimento nota 10, check-in rápido e as rotas são bem pensadas. Já é minha companhia favorita no Roblox."</p>
+          <div class="review__author">
+            <div class="review__avatar">R</div>
+            <div>
+              <div class="review__name">Rafael Souza</div>
+              <div class="review__role">Viajante frequente</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: LOGIN ========== -->
+  <section class="tela" id="tela-login" data-tela="login" hidden>
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <img src="united.png" alt="Reunited" class="auth-card__logo">
+        <h1 class="auth-card__title">Bem-vindo de volta</h1>
+        <p class="auth-card__sub">Entre na sua conta Reunited Airlines</p>
+
+        <form id="form-login" novalidate>
+          <div class="field">
+            <label class="field__label" for="login-user">Nome de usuário</label>
+            <input class="field__input" type="text" id="login-user" name="usuario" autocomplete="username" required>
+            <div class="field__error" id="err-login-user">Informe seu nome de usuário.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="login-pass">Senha</label>
+            <input class="field__input" type="password" id="login-pass" name="senha" autocomplete="current-password" required>
+            <div class="field__error" id="err-login-pass">Informe sua senha.</div>
+          </div>
+          <button class="btn btn--primary btn--full" type="submit">Entrar</button>
+          <button class="link-btn auth-card__forgot" type="button" data-ir="recuperar">Esqueci minha senha / Atualizar senha</button>
+        </form>
+
+        <p class="auth-footer">Não tem conta? <button class="link-btn" type="button" data-ir="cadastro">Criar conta</button></p>
+        <p class="auth-footer"><button class="link-btn" type="button" data-ir="landing">← Voltar para o início</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TELA: RECUPERAR SENHA ========== -->
+  <section class="tela" id="tela-recuperar" data-tela="recuperar" hidden>
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <img src="united.png" alt="Reunited" class="auth-card__logo">
+        <h1 class="auth-card__title">Atualizar senha</h1>
+        <p class="auth-card__sub">Informe seu usuário e defina uma nova senha</p>
+
+        <form id="form-recuperar" novalidate>
+          <div class="field">
+            <label class="field__label" for="rec-user">Nome de usuário</label>
+            <input class="field__input" type="text" id="rec-user" name="usuario" autocomplete="username" required>
+            <div class="field__error" id="err-rec-user">Informe seu nome de usuário.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="rec-nova">Nova senha</label>
+            <input class="field__input" type="password" id="rec-nova" name="nova" autocomplete="new-password" required>
+            <div class="field__error" id="err-rec-nova">A senha precisa ter ao menos 6 caracteres.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="rec-conf">Confirmar nova senha</label>
+            <input class="field__input" type="password" id="rec-conf" name="conf" autocomplete="new-password" required>
+            <div class="field__error" id="err-rec-conf">As senhas não coincidem.</div>
+          </div>
+          <button class="btn btn--primary btn--full" type="submit">Atualizar senha</button>
+        </form>
+
+        <p class="auth-footer"><button class="link-btn" type="button" data-ir="login">← Voltar para o login</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TELA: CADASTRO ========== -->
+  <section class="tela" id="tela-cadastro" data-tela="cadastro" hidden>
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <img src="united.png" alt="Reunited" class="auth-card__logo">
+        <h1 class="auth-card__title">Criar conta</h1>
+        <p class="auth-card__sub">Junte-se à Reunited Airlines</p>
+
+        <form id="form-cadastro" novalidate>
+          <div class="field">
+            <label class="field__label" for="cad-nome">Nome completo</label>
+            <input class="field__input" type="text" id="cad-nome" name="nome" autocomplete="name" required>
+            <div class="field__error" id="err-cad-nome">Informe seu nome completo.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cad-user">Nome de usuário</label>
+            <input class="field__input" type="text" id="cad-user" name="usuario" autocomplete="username" required>
+            <div class="field__error" id="err-cad-user">Informe um nome de usuário.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cad-email">E-mail</label>
+            <input class="field__input" type="email" id="cad-email" name="email" autocomplete="email" required>
+            <div class="field__error" id="err-cad-email">Informe um e-mail válido.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cad-senha">Senha</label>
+            <input class="field__input" type="password" id="cad-senha" name="senha" autocomplete="new-password" required>
+            <div class="field__error" id="err-cad-senha">A senha precisa ter ao menos 6 caracteres.</div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cad-conf">Confirme a senha</label>
+            <input class="field__input" type="password" id="cad-conf" name="conf" autocomplete="new-password" required>
+            <div class="field__error" id="err-cad-conf">As senhas não coincidem.</div>
+          </div>
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="cad-termos" name="termos" required>
+              <span>Concordo com os <button type="button" class="link-btn" data-ir="termos">Termos de Uso</button> e a <button type="button" class="link-btn" data-ir="privacidade">Política de Privacidade</button>.</span>
+            </label>
+            <div class="field__error" id="err-cad-termos">Você precisa aceitar os termos.</div>
+          </div>
+          <button class="btn btn--primary btn--full" type="submit">Criar conta</button>
+        </form>
+
+        <p class="auth-footer">Já tem conta? <button class="link-btn" type="button" data-ir="login">Fazer login</button></p>
+        <p class="auth-footer"><button class="link-btn" type="button" data-ir="landing">← Voltar para o início</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TELA: INÍCIO (logado) ========== -->
+  <section class="tela" id="tela-inicio" data-tela="inicio" hidden>
+    <main class="main">
+      <section class="greeting">
+        <div class="greeting__inner">
+          <h1 id="inicio-saudacao">Olá!</h1>
+          <p>Pronto para decolar? Confira algumas passagens em destaque.</p>
+        </div>
+      </section>
+      <h2 class="section-title"><span class="section-title__bar"></span>Passagens em destaque</h2>
+      <p class="section-sub">Selecionadas especialmente para você.</p>
+      <div class="flights-grid" id="inicio-flights"></div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: PASSAGENS ========== -->
+  <section class="tela" id="tela-passagens" data-tela="passagens" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Todas as passagens</h2>
+      <p class="section-sub">Escolha seu destino e boa viagem.</p>
+      <div class="flights-grid" id="passagens-lista"></div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: CARRINHO ========== -->
+  <section class="tela" id="tela-carrinho" data-tela="carrinho" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Carrinho</h2>
+      <p class="section-sub" id="carrinho-sub"></p>
+      <div class="cart-list" id="carrinho-lista"></div>
+      <div class="cart-empty" id="carrinho-vazio" hidden>
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12.5a2 2 0 0 0 2 1.5h8a2 2 0 0 0 2-1.5L21 7H5"/></svg>
+        <h3>Seu carrinho está vazio</h3>
+        <p>Adicione passagens para continuar.</p>
+        <button class="btn btn--primary" style="margin-top:16px" data-ir="passagens">Ver passagens</button>
+      </div>
+      <div class="cart-summary" id="carrinho-resumo" hidden>
+        <div class="cart-summary__count">Total: <strong id="carrinho-total">0</strong> passagem(ns) gratuita(s)</div>
+        <button class="btn btn--primary" id="btn-finalizar">Finalizar compra →</button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: CONFIGURAÇÕES ========== -->
+  <section class="tela" id="tela-config" data-tela="config" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Configurações</h2>
+
+      <div class="settings-group">
+        <div class="settings-group__head">Geral</div>
+        <button class="settings-item" data-ir="suporte">Suporte <span class="settings-item__arrow">›</span></button>
+        <div class="settings-item" style="cursor:default">
+          <span>Cor do tema</span>
+        </div>
+        <div class="theme-picker">
+          <button class="theme-swatch" data-tema-op="preto"><span class="theme-swatch__dot"></span> Preto</button>
+          <button class="theme-swatch" data-tema-op="branco"><span class="theme-swatch__dot"></span> Branco</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group__head">Jurídico</div>
+        <button class="settings-item" data-ir="termos">Termos de Uso <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item" data-ir="privacidade">Política de Privacidade <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item" data-ir="contrato">Contrato de Adesão de Transporte Aéreo <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item" data-ir="candidatura">Candidatura de emprego <span class="settings-item__arrow">›</span></button>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-group__head">Conta</div>
+        <button class="settings-item" data-ir="conta-info">Informações <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item" data-ir="conta-editar">Editar informações <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item" id="btn-logout">Fazer log-out <span class="settings-item__arrow">›</span></button>
+        <button class="settings-item settings-item--danger" id="btn-excluir">Excluir conta <span class="settings-item__arrow">›</span></button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: INFORMAÇÕES DA CONTA ========== -->
+  <section class="tela" id="tela-conta-info" data-tela="conta-info" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Informações da conta</h2>
+      <div class="legal">
+        <p><strong>Nome completo:</strong> <span id="info-nome"></span></p>
+        <p><strong>Nome de usuário:</strong> <span id="info-user"></span></p>
+        <p><strong>E-mail:</strong> <span id="info-email"></span></p>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: EDITAR INFORMAÇÕES ========== -->
+  <section class="tela" id="tela-conta-editar" data-tela="conta-editar" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Editar informações</h2>
+      <div class="legal">
+        <form id="form-editar">
+          <div class="field">
+            <label class="field__label" for="ed-nome">Nome completo</label>
+            <input class="field__input" type="text" id="ed-nome" name="nome" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="ed-user">Nome de usuário</label>
+            <input class="field__input" type="text" id="ed-user" name="usuario" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="ed-email">E-mail</label>
+            <input class="field__input" type="email" id="ed-email" name="email" required>
+          </div>
+          <button class="btn btn--primary" type="submit">Salvar alterações</button>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: SUPORTE ========== -->
+  <section class="tela" id="tela-suporte" data-tela="suporte" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Suporte</h2>
+      <div class="legal">
+        <form id="form-suporte">
+          <div class="field">
+            <label class="field__label" for="sup-assunto">Assunto</label>
+            <input class="field__input" type="text" id="sup-assunto" name="assunto" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="sup-mensagem">Mensagem</label>
+            <textarea class="field__textarea" id="sup-mensagem" name="mensagem" required></textarea>
+          </div>
+          <div class="field">
+            <label class="field__label" for="sup-imagem">Imagem (opcional)</label>
+            <input class="field__input" type="file" id="sup-imagem" name="imagem" accept="image/*">
+          </div>
+          <button class="btn btn--primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: CANDIDATURA ========== -->
+  <section class="tela" id="tela-candidatura" data-tela="candidatura" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Candidatura de emprego</h2>
+      <div class="legal">
+        <form id="form-candidatura">
+          <div class="field">
+            <label class="field__label" for="cd-nome">Nome</label>
+            <input class="field__input" type="text" id="cd-nome" name="nome" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cd-nomecompleto">Nome completo</label>
+            <input class="field__input" type="text" id="cd-nomecompleto" name="nomecompleto" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cd-discord">Usuário no Discord *</label>
+            <input class="field__input" type="text" id="cd-discord" name="discord" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cd-roblox">Usuário no Roblox *</label>
+            <input class="field__input" type="text" id="cd-roblox" name="roblox" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cd-motivo">Por que quer trabalhar na Reunited?</label>
+            <textarea class="field__textarea" id="cd-motivo" name="motivo" required></textarea>
+          </div>
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="cd-normas" name="normas" required>
+              <span>Reconheço as normas de segurança da aviação (mesmo no PTFS). *</span>
+            </label>
+          </div>
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="cd-atc" name="atc" required>
+              <span>Reconheço obedecer às instruções do ATC. *</span>
+            </label>
+          </div>
+          <div class="field">
+            <label class="field__label" for="cd-profissao">Profissão *</label>
+            <select class="field__select" id="cd-profissao" name="profissao" required>
+              <option value="">Selecione...</option>
+              <option value="Copiloto">Copiloto</option>
+              <option value="Comissário">Comissário</option>
+              <option value="Baliza">Baliza</option>
+              <option value="ATC">ATC</option>
+              <option value="Despacho de malas">Despacho de malas</option>
+            </select>
+          </div>
+          <button class="btn btn--primary" type="submit">Enviar candidatura</button>
+        </form>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: TERMOS ========== -->
+  <section class="tela" id="tela-termos" data-tela="termos" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Termos de Uso</h2>
+      <div class="legal">
+        <h2>Termos de Uso e Navegação e Compras no Site Reunited Airlines</h2>
+        <p>Aqui nestes termos de uso com Reunited Airlines, empresa de transporte aéreo, doravante denominada Reunited, e você, contratante do serviço, doravante denominado Usuário, concorda com o seguinte serviço:</p>
+        <h3>1. Objeto</h3>
+        <p>O objeto em si tem como tal proposta a utilização do site e a compra de passagens de transporte aéreo no site da companhia.</p>
+        <h3>2. Vigência e Vigor</h3>
+        <p>2.1. A vigência destes presentes termos de uso é indeterminada, sendo encerrada apenas na rescisão.</p>
+        <p>2.2. O vigor destes presentes termos de uso é imediato, logo após a criação de conta.</p>
+        <h3>3. Rescisão</h3>
+        <p>A rescisão é gratuita, podendo ser realizada na exclusão da conta do Usuário, efetuada apenas pelo Usuário.</p>
+        <h3>4. Vinculação jurídica</h3>
+        <p>Os presentes termos de uso não têm qualquer vinculação jurídica, empregatícia e outras, sendo apenas o acordo de utilização do site. As 2 partes claramente são menores de idade, isso foi feito na zoeira pra levar o amigo pra viajar e nem a Reunited e nem o Usuário poderão levar isso na justiça.</p>
+        <h3>5. Das passagens</h3>
+        <p>Ao comprar uma passagem, o Usuário concorda com as cláusulas do <button type="button" class="link-btn" data-ir="contrato">Contrato de Adesão de Transporte Aéreo</button>.</p>
+        <h3>6. Foro</h3>
+        <p>Fica eleito o foro da conversa no PV do TikTok ou do Discord para dirimir quaisquer controvérsias oriundas dos presentes termos de uso.</p>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: PRIVACIDADE ========== -->
+  <section class="tela" id="tela-privacidade" data-tela="privacidade" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Política de Privacidade</h2>
+      <div class="legal">
+        <h2>Política de Privacidade e Tratamento de Dados da Reunited Airlines</h2>
+        <p>Pelas presentes cláusulas da Política de privacidade, aqui se firmam a Reunited Airlines, doravante denominada Protetor, e você, contratante do serviço e fornecedor de dados pessoais não sensíveis, doravante denominado Protegido.</p>
+        <h3>1. Dos dados coletados</h3>
+        <p>Os dados coletados do Protegido são:</p>
+        <ul><li>e-mail;</li><li>nome completo.</li></ul>
+        <h3>2. Do tratamento de dados</h3>
+        <p>Os dados do Protegido serão tratados cautelosamente com proteção contra invasões e outras coisas.</p>
+        <h3>3. Vigência e vigor</h3>
+        <p>3.1. A vigência desta presente política de privacidade é indeterminada, durando até acontecer a rescisão.</p>
+        <p>3.1.1. Após a rescisão, os dados do Protegido serão apagados.</p>
+        <p>3.2. O vigor desta presente política de privacidade é imediato, sendo realizada logo no ato da criação da conta.</p>
+        <h3>4. Rescisão</h3>
+        <p>A rescisão é gratuita, sendo efetuada pelo Protegido no ato da exclusão da conta.</p>
+        <h3>5. Vinculação jurídica</h3>
+        <p>A presente política de privacidade não contém nenhuma vinculação jurídica, empregatícia, entre outras, sendo apenas um acordo de confidencialidade sério de dados, mas que ainda serão tratados rigorosamente.</p>
+        <h3>6. Cookies</h3>
+        <p>O site não tem utilização de cookies.</p>
+        <h3>7. Foro</h3>
+        <p>Fica eleito o foro do PV do TikTok ou do Discord para dirimir quaisquer controvérsias oriundas desta presente política de privacidade.</p>
+      </div>
+    </main>
+  </section>
+
+  <!-- ========== TELA: CONTRATO ========== -->
+  <section class="tela" id="tela-contrato" data-tela="contrato" hidden>
+    <main class="main">
+      <h2 class="section-title"><span class="section-title__bar"></span>Contrato de Adesão de Transporte Aéreo</h2>
+      <div class="legal">
+        <h2>Contrato De Prestação De Serviços Para Fins De Transporte Aéreo Comercial E Civil</h2>
+        <p>Pelo presente instrumento particular, Reunited Airlines, companhia contratada pelo Cliente para transporte aéreo, doravante denominada Linha Aérea, e você, contratante do serviço de transporte aéreo, doravante denominado Cliente, têm entre si o justo e contratado o seguinte:</p>
+        <h3>1. Proposta</h3>
+        <p>O presente contrato tem como tal proposta a prestação de serviços de transporte aéreo no jogo Pilot Training Flight Simulator na plataforma Roblox.</p>
+        <h3>2. Vigência e vigor</h3>
+        <p>2.1. A vigência deste presente contrato é indeterminada, produzindo efeitos até a rescisão.</p>
+        <p>2.2. O vigor deste contrato produz efeitos quando o Cliente comprar sua primeira passagem aérea.</p>
+        <h3>3. Rescisão</h3>
+        <p>A rescisão deste contrato é gratuita, podendo ser realizada pelo Cliente na exclusão de sua conta.</p>
+        <h3>4. Propostas da viagem</h3>
+        <p>4.1. A Linha Aérea propõe essas coisas na classe econômica:</p>
+        <ol>
+          <li>Conforto;</li>
+          <li>Bagageiro para bagagens;</li>
+          <li>Espaço na área inferior dos assentos para bagagens;</li>
+          <li>Multimídia de entretenimento nos assentos com: música, programação de emissoras de televisão e rádio, jogos eletrônicos de entretenimento e fone para conectar a multimídia;</li>
+          <li>Serviços de bordo com comida, bebidas não alcoólicas, marmitas em viagens longas, entre outros;</li>
+          <li>Inclinação de 20° da poltrona.</li>
+        </ol>
+        <p>4.2. A Linha Aérea propõe estas coisas na primeira classe:</p>
+        <ol>
+          <li>Conforto;</li>
+          <li>Bagageiro para bagagens;</li>
+          <li>Espaço na área inferior dos assentos para bagagens;</li>
+          <li>Multimídia de entretenimento nos assentos com: música, programação de emissoras de televisão e rádio, jogos eletrônicos de entretenimento, filmes, séries, navegação em sites e fone para conectar a multimídia;</li>
+          <li>Serviços de bordo com comida, bebidas não alcoólicas, bebidas alcoólicas, marmitas em viagens longas, sobremesas, pratos gourmet, entre outros;</li>
+          <li>Inclinação de 90° da poltrona;</li>
+          <li>Paredes de privacidade ao lado das poltronas;</li>
+          <li>Abafadores para dormir à noite;</li>
+          <li>Cobertores;</li>
+          <li>Poltronas em dupla nas fileiras das janelas, se for viajar em dupla, como um casal ou outra coisa.</li>
+        </ol>
+        <p>4.3. Não há classe executiva.</p>
+        <h3>5. Normas de segurança</h3>
+        <p>A Linha Aérea segue todas as normas de segurança aéreas, seguindo instruções das equipes de solo, ATC, e entre outras normas de leis e segurança.</p>
+        <h3>6. Do comportamento</h3>
+        <p>O Cliente não poderá se comportar de forma agressiva e outras que causem perigo, constrangimento e outras coisas no voo, podendo ser amarrado na poltrona caso apresente estes sinais.</p>
+        <h3>7. Vinculação jurídica</h3>
+        <p>Este contrato não tem nenhuma vinculação jurídica, empregatícia, entre outras formas, sendo apenas o acordo pra ser passageiro nos aviõezinhos do jogo. Cliente, Linha Aérea e outras pessoas não poderão levar algo na justiça envolvendo o setor "jurídico".</p>
+        <h3>8. Das informações da passagem</h3>
+        <p>8.1. Cada passagem em específico apresentará: rota, horário, dia e modelo da aeronave.</p>
+        <p>8.2. Em cada passagem, o Cliente deverá escolher sua poltrona, não podendo escolher poltronas já marcadas.</p>
+        <h3>9. Tipo de contrato</h3>
+        <p>Este contrato será qualificado como um contrato de adesão, sendo inegociável e redigido apenas pela Linha Aérea.</p>
+        <h3>10. Foro</h3>
+        <p>Fica eleito o foro do PV do TikTok ou do Discord para dirimir quaisquer controvérsias oriundas deste contrato.</p>
+        <p>E por estarem assim, justos e contratados, as partes assinam este contrato em 1 única via eletrônica digital.</p>
+        <p><strong>Assinatura da Linha Aérea:</strong><br>Reunited Airlines — Priorizando Seu Conforto.</p>
+        <p><strong>Pelo Cliente:</strong><br>A concordância com este contrato é realizada conforme descrito no item 2.2 da cláusula 2.</p>
+      </div>
+    </main>
+  </section>
+
+</div>
+
+<!-- ================= MODAL GENÉRICO ================= -->
+<div class="modal-overlay" id="modal-overlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <h2 class="modal__title" id="modal-titulo"></h2>
+    <p class="modal__sub" id="modal-sub"></p>
+    <div id="modal-corpo"></div>
+    <div class="modal__actions" id="modal-acoes"></div>
+  </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
