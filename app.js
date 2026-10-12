@@ -27,22 +27,13 @@ const state = {
 
 const PASSAGENS = [
   {
-    id: '10482',
-    origem: 'Guarulhos (Greater Rockford)',
-    destino: 'New York (Larnaca)',
-    dia: 'Hoje',
-    horario: '19:30',
-    aeronave: 'Airbus A330',
-    assentosOcupados: ['1A', '2C', '3D']
-  },
-  {
     id: '52791',
     origem: 'New York (Larnaca)',
     destino: 'Rio de Janeiro (Tokyo)',
     dia: '13/10/2026',
     horario: '18:00',
     aeronave: 'Boeing 787',
-    assentosOcupados: ['1B', '4A']
+    assentosOcupados: []
   }
 ];
 
