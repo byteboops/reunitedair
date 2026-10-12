@@ -209,7 +209,18 @@ function cardPassagem(p) {
 
 function renderInicio() {
   $('#inicio-saudacao').textContent = `Olá, ${state.usuario.usuario}!`;
-  $('#inicio-flights').innerHTML = PASSAGENS.map(cardPassagem).join('');
+
+  const destaques = PASSAGENS.filter(p => p.destaque === true);
+
+  if (!destaques.length) {
+    $('#inicio-flights').innerHTML = `
+      <p style="color:var(--texto-sec);grid-column:1/-1">
+        Nenhuma passagem em destaque no momento.
+      </p>`;
+    return;
+  }
+
+  $('#inicio-flights').innerHTML = destaques.map(cardPassagem).join('');
 }
 
 function renderPassagens() {
