@@ -31,7 +31,7 @@ const PASSAGENS = [
     origem: 'New York (Larnaca)',
     destino: 'Rio de Janeiro (Tokyo)',
     dia: '13/10/2026',
-    horario: '18:00',
+    horario: '17:00',
     aeronave: 'Boeing 787',
     assentosOcupados: []
   }
